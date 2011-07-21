@@ -4,10 +4,8 @@ A message queue for Redis in Node.js that mimics pub/sub functionality but uses 
 
 To get started...
 
-1. Clone the repo
-2. npm install redis
-3. npm install filter
-4. Execute test applications in /tests/ (set redis config first)
+1. npm install redmess
+2. Execute test applications in /tests/ (set redis config first)
 
 
 Set up a publisher...

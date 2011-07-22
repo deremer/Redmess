@@ -3,8 +3,8 @@ Redmess 0.1.1
 
 ## What's Redmess
 
-Redis Pub/Sub-esque implementation with persistence
-A message queue for Redis in Node.js that mimics pub/sub functionality but uses Redis lists to enable persistence. Designed to support multiple node processes that can listen to each other to perform different tasks.
+Redis Pub/Sub-esque implementation with persistence. A message queue for Redis in Node.js that mimics pub/sub functionality but uses Redis lists to enable persistence. Designed to support multiple node processes that can listen to each other to perform different tasks. This is essentially a highly simplified version of node-rqueue (https://github.com/votizen/node-rqueue) by Tim-Smart.
+
 
 ## Setup & see how it works
 

@@ -1,16 +1,10 @@
 var redmess = require('../');
 
 // Set config details for redis
-/*var	config = {
+var	config = {
 		port : 0000,
 		server : 'server.redistogo.com',
 		key : 'mycrazylookingkey'
-};*/
-
-var	config = {
-		port : 9231,
-		server : 'barreleye.redistogo.com',
-		key : '2e4fab04f2d0acbb55d75bb6dc2da7a4'
 };
 
 // Create publisher

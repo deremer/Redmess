@@ -4,7 +4,7 @@ var redmess = require('../');
 var	config = {
 		port : 0000,
 		server : 'server.redistogo.com',
-		key : 'mycrazylookingkey'
+		key : 'yourcrazylookingkey'
 };
 
 // Set channels that subscriber knows how to handle
@@ -12,7 +12,7 @@ var channels = ['channel1', 'channel2'];
 
 // Create subscriber for 'test_pipe'
 // Omitting 'channels' as a parameter will cause the subscriber to respond to all messages on 'default'
-var aSubscriber = new redmess.Subscriber('sub_name', 'test_pipe', config, channels);
+var aSubscriber = new redmess.Subscriber(config, 'sub_name', 'test_pipe', channels);
 
 aSubscriber.on('channel1', function (data) {
   

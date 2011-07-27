@@ -3,15 +3,18 @@ Redmess 0.1.1
 
 ## What's Redmess
 
-Redis Pub/Sub-esque implementation with persistence. A message queue for Redis in Node.js that mimics pub/sub functionality but uses Redis lists to enable persistence. Designed to support multiple node processes that can listen to each other to perform different tasks. This is essentially a highly simplified version of node-rqueue (https://github.com/votizen/node-rqueue) by Tim-Smart.
+Redis Pub/Sub-esque implementation with persistence. A message queue for Redis in Node.js that mimics pub/sub functionality but uses Redis lists to enable persistence. Designed to separate background processing from a web app - just drop a message from the web app to a different node app running elsewhere.
+
+Note that this is currently under development and there are likely to be bugs.
 
 
 ## Setup & see how it works
 
 1. npm install redmess
-2. configure 'config' in test/publish.js and test/subscribe.js
+2. configure 'config' in test/publish.js and test/subscribe.js to reach your red is server
 3. node test/subscribe.js
 4. node test/publish.js (in separate terminal window)
+5. check your console to verify output
 
 
 ## Setup a publisher:
@@ -23,7 +26,7 @@ var	config = {
 		key : 'yourcrazylookingkey'
 };
 
-var aPublisher = new redmess.Publisher('pub_name', config);
+var aPublisher = new redmess.Publisher(config, 'pub_name');
 
 // Send a message to channel1
 var obj1 = { 'some': 'object' };
@@ -33,9 +36,7 @@ aPublisher.publish('test_pipe', 'channel1', obj1, function (err, res) {
 
 // Send a message to channel2
 var obj2 = { 'someother': 'object' };
-aPublisher.publish('test_pipe', 'channel2', obj2, function (err, res) {
-	// This callback is optional	
-});
+aPublisher.publish('test_pipe', 'channel2', obj2);
 
 ```
 
@@ -49,7 +50,7 @@ var	config = {
 };
 
 // To respond to all channels on test_pipe, omit the fourth parameter 'channels'
-var aSubscriber = new redmess.Subscriber('sub_name', 'test_pipe', config);
+var aSubscriber = new redmess.Subscriber(config, 'sub_name', 'test_pipe');
 
 aSubscriber.on('default', function (data) {
   
@@ -66,7 +67,7 @@ aSubscriber.start();
 
 // To respond to specific channels on test_pipe
 var channels = ['channel1', 'channel2'];
-var bSubscriber = new redmess.Subscriber('sub_name', 'test_pipe', config, channels);
+var bSubscriber = new redmess.Subscriber(config, 'sub_name', 'test_pipe', channels);
 
 bSubscriber.on('channel1', function (data) {
   
@@ -100,4 +101,7 @@ bSubscriber.on('default', function (data) {
 // Start listening
 bSubscriber.start();
 ```
+
+## Credits
+This is based on and essentially a highly simplified version of node-rqueue (https://github.com/votizen/node-rqueue) by Tim-Smart.
 

@@ -4,11 +4,11 @@ var redmess = require('../');
 var	config = {
 		port : 0000,
 		server : 'server.redistogo.com',
-		key : 'mycrazylookingkey'
+		key : 'yourcrazylookingkey'
 };
 
 // Create publisher
-var aPublisher = new redmess.Publisher('pub_name', config);
+var aPublisher = new redmess.Publisher(config, 'pub_name');
 
 
 // Run a simple loop to publish messages to different channels
@@ -25,15 +25,16 @@ var haveFun = function() {
 	var obj2 = { 'random': Math.random() };
 	aPublisher.publish('test_pipe', 'channel2', obj2, function (err, res) {
 		if (err) { console.log(err); }
-		if (res) { console.log(res); }
+		if (res) {
+			// Do something else with the result
+			var theResult = "The result is: " + res;
+			console.log(theResult); 
+		}
 	});
 	
-	// Publish message to 'test_pipe' on 'unknownChannel'
+	// Publish message to 'test_pipe' on 'unknownChannel' with no callback
 	var obj3 = { 'something': Date.now() * Math.random() };
-	aPublisher.publish('test_pipe', 'unknownChannel', obj3, function (err, res) {
-		if (err) { console.log(err); }
-		if (res) { console.log(res); }
-	});
+	aPublisher.publish('test_pipe', 'unknownChannel', obj3);
 };
-
+  
 setTimeout(setInterval(haveFun, 1000), 20000);

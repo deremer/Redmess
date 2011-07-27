@@ -9,9 +9,7 @@
  * Authors: David DeRemer
  * https://github.com/deremer
  *   
- * Inspired by Tim-Smart's:
- * https://github.com/votizen/node-rqueue
- * (this is a simplified version)
+ * Based on Tim-Smart's: https://github.com/votizen/node-rqueue
  *
  **********************************************************/
  
@@ -29,39 +27,47 @@ var assert = require("assert"),
 /**********************************************************
  * Publisher.
  *
- * @Param {String} name: the name of the publisher
  * @Param {Object} config: config details for redis
  *	(e.g., var config = { port : XXXX, server : 'server', key : 'key'})
+ * @Param {String} name: the name of the publisher
  *
  **********************************************************/
 
-var Publisher = function (name, config) {
-	var self = this;
-	this.id = "Publisher:" + name; // Identifier of the publisher
-	this.pubClient = redis.createClient(config.port, config.server); // Publisher redis client
-	
-	// If authorization is required    
-	this.pubClient.auth(config.key, function (err, res) {
-	  if (err) { assert.fail(err, self.id);}
-	  assert.strictEqual("OK", res.toString(), "auth");
-	});
-	
-	// Print to console that publisher started
-	console.log('Started ' + this.id); 
-	
-	// Emit an error if there is a problem
-	this.pubClient.on('error', function (error) {
-    self.emit('error', error);
-  });
+var Publisher = function (config, name) {
+
+	if (config && name) {
+		var self = this;
+		this.id = "PUBLISHER:" + name; // Identifier of the publisher
+		
+		// Create publisher redis client
+		this.pubClient = redis.createClient(config.port, config.server);
+		
+		// If authorization is required    
+		this.pubClient.auth(config.key, function (err, res) {
+		  if (err) { aError(err, self.id);}
+		  assert.strictEqual("OK", res.toString(), "auth");
+		});
+		
+		// Print to console that publisher started
+		console.log('STARTED: ' + this.id); 
+		
+		// Emit an error if there is a problem
+		this.pubClient.on('error', function (error) {
+			if (error) { self.emit('error', error); }
+			else { aError('Received undefined error', self.id); }
+	  });
+	} else { aError('Missing required parameters — config/name'); }
 };
 
 // Inherits from filter
 util.inherits(Publisher, filter);
 
+
 /*
  * @Param {String} pipe: the name of the pipe
  * @Param {String} channel: the name of the channel being published to
  * @Param {Object} msg: the message payload being sent to the channel
+ * @Param {Object} callback(err, res): callback function to handle the err/res (Optional)
  */
 
 Publisher.prototype.publish = function(pipe, channel, msg, callback) {
@@ -69,7 +75,8 @@ Publisher.prototype.publish = function(pipe, channel, msg, callback) {
 // The channel is a unique identifier to allow subscribers to handle messages differently
 
 	if (pipe && channel && msg) {
-	
+		
+		var self = this;
 		// Prepare message payload
 		var tStamp = Date.now();
 		var message = JSON.stringify({
@@ -82,17 +89,17 @@ Publisher.prototype.publish = function(pipe, channel, msg, callback) {
 		this.pubClient.rpush(pipe, message, function(err, res) {
 			if (err) {
 				if (callback) { callback(err); }
-				else { aError(err); }
-			} else {
+				else { aError(err, self.id, message); }
+			} else if (res) {
 				if (callback) { callback(null, res); }
-				else { aSuccess(res); }
-			}
+				else { aSuccess(res, self.id, message); }
+			} else { aError('No error, but no result from redis', self.id, message); }
 		});
 		
 		return this.id + ':' + channel + ':' + tStamp;
 	
 	} else {
-		aError('missing required parameters - message not published');
+		aError('Missing required parameters: pipe/channel/msg');
 		return false;
 	}
 };
@@ -101,30 +108,24 @@ Publisher.prototype.publish = function(pipe, channel, msg, callback) {
 /**********************************************************
  * Subscriber.
  *
+ * @Param {Object} config: config details for redis
+ *	(e.g., var config = { port : XXXX, server : 'server', key : 'key'})
  * @Param {String} name: the name of the subscriber
  * @Param {String} pipe: the name of the pipe being subscribed to
- * @Param {Object} config: config details for redis
- * @Param {Array}  channels: (optional) array of channels the subscriber handles uniquely
- *	(e.g., var config = { port : XXXX, server : 'server', key : 'key'})
+ * @Param {Array}  channels: (optional) array of channels the subscriber handles uniquely (Optional)
  *
  **********************************************************/
  
-var Subscriber = function (name, pipe, config, channels) {
+var Subscriber = function (config, name, pipe, channels) {
 
-	if (name && pipe && config) {
+	if (config && name && pipe) {
+		
 		var self = this;
-		this.id = "Subscriber:" + name; // Identifier of the subscriber
+		this.id = "SUBSCRIBER:" + name; // Identifier of the subscriber
 		this.pipe = pipe;
 		
-		// If channels is not set, an empty array will cause all messages to be sent to 'default' channel
-		if (channels) {
-			if (channels instanceof Array && channels.length != 0) { this.channels = channels; }
-			else { aError("'channels' is not properly set"); }
-		} else {
-			this.channels = [];
-		}
-	
-		this.subClient =  redis.createClient(config.port, config.server); // Subscriber redis client
+		// Create subscriber redis client
+		this.subClient =  redis.createClient(config.port, config.server);
 		
 		// If authorization is required    
 		this.subClient.auth(config.key, function (err, res) {
@@ -132,33 +133,39 @@ var Subscriber = function (name, pipe, config, channels) {
 		  assert.strictEqual("OK", res.toString(), "auth");
 		});
 		
+		// If channels is not set, an empty array will cause all messages to be sent to 'default' channel
+		if (channels) {
+			if (channels instanceof Array && channels.length != 0) { this.channels = channels; }
+			else { aError("'channels' is not properly set", self.id); }
+		} else { this.channels = []; }
+	
 		this._onError = function (error) {
-	    if (error) {
-	      self.emit('error', error);
-	    }
+	    if (error) { self.emit('error', error); }
+			else { aError('Received undefined error', self.id); }
 	  }
 	  
 	  this.subClient.on('error', this._onError);
 	  
 		// Main listening function to blpop and emit data from redis
 		this._onPop = function (error, data) {
-	    if (error) {
-	      return self.emit('error', error);
-	    }
+	    if (error) { return self.emit('error', error); }
 	
 			// Parse the message to JSON and emit
 	    try {
-				// data[0] is the name of the pipe
-				// data[1] is the pipe's payload
-	      data = JSON.parse(data[1]);
+	    
+	      data = JSON.parse(data[1]); // data[0] = name of the pipe, data[1] = pipe's payload
 	      
 	      // if channel is handled by subscriber emit with channel's label
-	      // otherwise emit it as the default channel
 	      if (self.channels.indexOf(data.channel) != -1) {
-	      	self.emit(data.channel, data);
-	      } else {
-	      	self.emit('default', data);
+	      	self.emit(data.channel, data); 
+	      	aSuccess('Received Message', self.id, JSON.stringify(data));
 	      }
+	      // otherwise emit it as the default channel
+	      else {
+	      	self.emit('default', data);
+	      	aSuccess('Received Message on Default', self.id, JSON.stringify(data));
+	      }
+	      
 	    } catch (json_error) { self._onError(json_error); }
 	
 			// Listen for more messages
@@ -167,24 +174,26 @@ var Subscriber = function (name, pipe, config, channels) {
 	    }
 	  };
 	  
-  } else {
-		aError('missing required parameters - subscriber not started');
-		return false;
-	}
+  } else { aError('Missing required parameters: config:' + config + ', name:' + name + ', pipe:' + pipe, self.id); }
 };
 
 // Inherits from filter
 util.inherits(Subscriber, filter);
 
 Subscriber.prototype.start = function () {
-	// Print to console that subscriber started
-	console.log('Started - ' + this.id);
+	var self = this;
+
 	// Prints the number of messages in the queue, then starts loop
-	this.subClient.llen(this.pipe, redis.print);
+	this.subClient.llen(this.pipe, function (err, reply) {
+    if (err) { aError(err, self.id + " on pipe " + self.pipe); }
+    else { console.log('STARTED: ' + self.id + ' PIPE:' + self.pipe + " INITIAL_LENGTH:" + reply); }
+  });
+  // Begin listening for new messages  
 	this.next();
 };
 
 Subscriber.prototype.next = function () {
+	// Blocking List pop — blocks connecting until new list item is added
 	this.subClient.blpop(this.pipe, 0, this._onPop);
 };
 
@@ -205,21 +214,23 @@ exports.Subscriber = Subscriber;
  * Support functions.
  **********************************************************/
 
-var aError = function (err, callback) {
-	if (err) {
-		//console.log('An error occured: ' + err);
-		if (callback) { callback(err); }
-		else { throw err; }
-	}
+var aError = function (err, id, message) {
+	var toPrint = 'FAILURE: ';
+	if (id) { toPrint = toPrint + id; }
+	if (err) { toPrint = toPrint + 'ERROR:' + err; }
+	else { toPrint = toPrint + 'ERROR:Undefined Error'; }
+	if (message) { toPrint = toPrint + ' MESSAGE:' + message; }
+	console.log(toPrint);
+	throw toPrint;
 }
 
-var aSuccess = function (msg, callback) {
-	if (msg) {
-		//console.log('Success: ' + msg);
-		if (callback) { callback(msg); }
-		else { console.log('Success: ' + msg); }
-	}
+var aSuccess = function (res, id, message) {
+	var toPrint = 'SUCCESS: ';
+	if (id) { toPrint = toPrint + id; }
+	if (res) { toPrint = toPrint + ' RESULT:' + res; }
+	else { toPrint = toPrint + ' RESULT:Undefined Result'; }
+	if (message) { toPrint = toPrint + ' MESSAGE:' + message; }
+	console.log(toPrint);
 }
-
 
 

@@ -2,10 +2,10 @@ var redmess = require('../');
 
 // Set config details for redis
 var	config = {
-		port : 0000,
-		server : 'server.redistogo.com',
-		key : 'mycrazylookingkey'
-};
+			port : 9249,
+			server : 'barreleye.redistogo.com',
+			key : '8f75b4c33ce0c98f6185ea4791a67815'
+		};
 
 // Set channels that subscriber knows how to handle
 var channels = ['channel1', 'channel2'];

@@ -1,4 +1,4 @@
-Redmess 0.1.1
+Redmess 0.1.4
 ============
 
 ## What's Redmess
@@ -11,7 +11,7 @@ Note that this is currently under development and there are likely to be bugs.
 ## Setup & see how it works
 
 1. npm install redmess
-2. configure 'config' in test/publish.js and test/subscribe.js to reach your red is server
+2. configure 'config' in test/publish.js and test/subscribe.js to reach your redis server
 3. node test/subscribe.js
 4. node test/publish.js (in separate terminal window)
 5. check your console to verify output
@@ -22,8 +22,8 @@ Note that this is currently under development and there are likely to be bugs.
 ```javascript
 var	config = {
 		port : 0000,
-		server : 'server.redistogo.com',
-		key : 'yourcrazylookingkey'
+		host : 'server.redistogo.com',
+		pass : 'yourcrazylookingkey'
 };
 
 var aPublisher = new redmess.Publisher(config, 'pub_name');
@@ -45,8 +45,8 @@ aPublisher.publish('test_pipe', 'channel2', obj2);
 ```javascript
 var	config = {
 		port : 0000,
-		server : 'server.redistogo.com',
-		key : 'yourcrazylookingkey'
+		host : 'server.redistogo.com',
+		pass : 'yourcrazylookingkey'
 };
 
 // To respond to all channels on test_pipe, omit the fourth parameter 'channels'

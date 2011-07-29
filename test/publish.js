@@ -1,11 +1,13 @@
 var redmess = require('../');
 
 // Set config details for redis
+
 var	config = {
 		port : 0000,
-		server : 'server.redistogo.com',
-		key : 'yourcrazylookingkey'
+		host : 'server.redistogo.com',
+		pass : 'yourcrazylookingkey'
 };
+
 
 // Create publisher
 var aPublisher = new redmess.Publisher(config, 'pub_name');

@@ -28,7 +28,7 @@ var assert = require("assert"),
  * Publisher.
  *
  * @Param {Object} config: config details for redis
- *	(e.g., var config = { port : XXXX, server : 'server', key : 'key'})
+ *	(e.g., var config = { port : XXXX, host : 'host', pass : 'pass'})
  * @Param {String} name: the name of the publisher
  *
  **********************************************************/
@@ -40,10 +40,10 @@ var Publisher = function (config, name) {
 		this.id = "PUBLISHER:" + name; // Identifier of the publisher
 		
 		// Create publisher redis client
-		this.pubClient = redis.createClient(config.port, config.server);
+		this.pubClient = redis.createClient(config.port, config.host);
 		
 		// If authorization is required    
-		this.pubClient.auth(config.key, function (err, res) {
+		this.pubClient.auth(config.pass, function (err, res) {
 		  if (err) { aError(err, self.id);}
 		  assert.strictEqual("OK", res.toString(), "auth");
 		});
@@ -109,7 +109,7 @@ Publisher.prototype.publish = function(pipe, channel, msg, callback) {
  * Subscriber.
  *
  * @Param {Object} config: config details for redis
- *	(e.g., var config = { port : XXXX, server : 'server', key : 'key'})
+ *	(e.g., var config = { port : XXXX, host : 'host', pass : 'pass'})
  * @Param {String} name: the name of the subscriber
  * @Param {String} pipe: the name of the pipe being subscribed to
  * @Param {Array}  channels: (optional) array of channels the subscriber handles uniquely (Optional)
@@ -125,10 +125,10 @@ var Subscriber = function (config, name, pipe, channels) {
 		this.pipe = pipe;
 		
 		// Create subscriber redis client
-		this.subClient =  redis.createClient(config.port, config.server);
+		this.subClient =  redis.createClient(config.port, config.host);
 		
 		// If authorization is required    
-		this.subClient.auth(config.key, function (err, res) {
+		this.subClient.auth(config.pass, function (err, res) {
 		  if (err) { assert.fail(err, self.id);}
 		  assert.strictEqual("OK", res.toString(), "auth");
 		});

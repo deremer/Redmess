@@ -1,7 +1,7 @@
 var redmess = require('../');
 
 // Set config details for redis
-var	config = {
+var config = {
 		port : 0000,
 		server : 'server.redistogo.com',
 		key : 'yourcrazylookingkey'
@@ -17,7 +17,7 @@ var aSubscriber = new redmess.Subscriber(config, 'sub_name', 'test_pipe', channe
 aSubscriber.on('channel1', function (data) {
   
   // Do something interesting with the message
-  console.log('channel1: ' + JSON.stringify(data));
+  console.log('__SUBSCRIBER CLIENT: channel1: ' + JSON.stringify(data));
   
   // Listen for next message
   aSubscriber.next();
@@ -26,7 +26,7 @@ aSubscriber.on('channel1', function (data) {
 aSubscriber.on('channel2', function (data) {
   
   // Do something interesting with the message
-  console.log('channel2: ' + JSON.stringify(data));
+  console.log('__SUBSCRIBER CLIENT: Doing something else with the data:' + new Date(data.timestamp));
   
   // Listen for next message
   aSubscriber.next();
@@ -35,7 +35,7 @@ aSubscriber.on('channel2', function (data) {
 aSubscriber.on('default', function (data) {
   
   // Do something interesting with the message
-  console.log('Doing the default action for: ' + JSON.stringify(data));
+  console.log('__SUBSCRIBER CLIENT: Doing the default action for: ' + JSON.stringify(data));
   
   // Listen for next message
   aSubscriber.next();

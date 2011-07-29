@@ -17,18 +17,18 @@ var haveFun = function() {
 	// Publish message to 'test_pipe' on 'channel1'
 	var obj1 = { 'time': Date.now() };
 	aPublisher.publish('test_pipe', 'channel1', obj1, function (err, res) {
-		if (err) { console.log(err); }
-		if (res) { console.log(res); }
+		if (err) { console.log('__PUBLISHER CLIENT:' + err); }
+		if (res) { console.log('__PUBLISHER CLIENT:' + res); }
 	});
 	
 	// Publish message to 'test_pipe' on 'channel2'
 	var obj2 = { 'random': Math.random() };
 	aPublisher.publish('test_pipe', 'channel2', obj2, function (err, res) {
-		if (err) { console.log(err); }
+		if (err) { console.log('__PUBLISHER CLIENT:' + err); }
 		if (res) {
 			// Do something else with the result
 			var theResult = "The result is: " + res;
-			console.log(theResult); 
+			console.log('__PUBLISHER CLIENT:' + theResult); 
 		}
 	});
 	

@@ -79,14 +79,14 @@ Publisher.prototype.publish = function(pipe, channel, msg, callback) {
 		var self = this;
 		// Prepare message payload
 		var tStamp = Date.now();
-		var message = JSON.stringify({
+		var message = {
 			'channel' : channel,
 			'msg': msg,
 			'timestamp': tStamp
-		});
+		};
 	
 		// Execute rpush to redis for the pipe
-		this.pubClient.rpush(pipe, message, function(err, res) {
+		this.pubClient.rpush(pipe, JSON.stringify(message), function(err, res) {
 			if (err) {
 				if (callback) { callback(err); }
 				else { aError(err, self.id, message); }
@@ -158,12 +158,12 @@ var Subscriber = function (config, name, pipe, channels) {
 	      // if channel is handled by subscriber emit with channel's label
 	      if (self.channels.indexOf(data.channel) != -1) {
 	      	self.emit(data.channel, data); 
-	      	aSuccess('Received Message', self.id, JSON.stringify(data));
+	      	aSuccess('Received Message', self.id, data);
 	      }
 	      // otherwise emit it as the default channel
 	      else {
 	      	self.emit('default', data);
-	      	aSuccess('Received Message on Default', self.id, JSON.stringify(data));
+	      	aSuccess('Received Message on Default', self.id, data);
 	      }
 	      
 	    } catch (json_error) { self._onError(json_error); }
@@ -181,6 +181,7 @@ var Subscriber = function (config, name, pipe, channels) {
 util.inherits(Subscriber, filter);
 
 Subscriber.prototype.start = function () {
+
 	var self = this;
 
 	// Prints the number of messages in the queue, then starts loop
@@ -229,7 +230,8 @@ var aSuccess = function (res, id, message) {
 	if (id) { toPrint = toPrint + id; }
 	if (res) { toPrint = toPrint + ' RESULT:' + res; }
 	else { toPrint = toPrint + ' RESULT:Undefined Result'; }
-	if (message) { toPrint = toPrint + ' MESSAGE:' + message; }
+	if (message && message.channel) { toPrint = toPrint + ' CHANNEL:' + message.channel; }
+	if (message && message.timestamp) { toPrint = toPrint + ' TIMESTAMP:' + message.timestamp; }
 	console.log(toPrint);
 }
 

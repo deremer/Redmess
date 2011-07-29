@@ -1,0 +1,228 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'publish', 'redmess' ]
+info using npm@1.0.8
+info using node@v0.5.0-pre
+verbose config file /Users/dd/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose publish [ 'redmess' ]
+info addNamed [ 'redmess', '' ]
+verbose addNamed [ null, '' ]
+verbose GET redmess
+verbose raw, before any munging redmess
+verbose url resolving [ 'http://registry.npmjs.org/', './redmess' ]
+verbose url resolved http://registry.npmjs.org/redmess
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/redmess',
+verbose url parsed   pathname: '/redmess' }
+verbose response http://registry.npmjs.org/redmess
+silly chunk {"_id":"redmess","_rev":"5-29d20e3eedf1eaed23344700497b3662","name":"redmess","description":"A redis pub/sub using lists to achieve persistence","dist-tags":{"latest":"0.1.1"},"versions":{"0.1.0":{"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"name":"redmess","description":"A redis pub/sub using lists to achieve persistence","version":"0.1.0","repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"},"main":"index.js","engines":{"node":"v0.5.0-pre"},"dependencies":{"redis":"0.6.6","filter":"0.1.0"},"devDependencies":{},"_id":"redmess@0.1.0","_engineSupported":true,"_npmVersion":"1.0.8","_nodeVersion":"v0.5.0-pre","_defaultsLoaded":true,"dist":{"shasum":"67345c4eac7252c767c60b7d37b4edcc2840586a","tarball":"http://registry.npmjs.org/redmess/-/redmess-0.1.0.tgz"},"scripts":{},"directories":{}},"0.1.1":{"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"name":"redmess","description":"A redis pub/sub using lists to achieve persistence","version":"0.1.1","repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"},"main":"index.js","engines":{"node":"v0.5.0-pre"},"dependencies":{"redis":"0.6.6","filter":"0.1.0"},"devDependencies":{},"_id":"redmess@0.1.1","_engineSupported":
+silly chunk true,"_npmVe
+silly chunk rsion":"1.0.8","_nodeVersion":"v0.5.0-pre","_defaultsLoaded":true,"dist":{"shasum":"a4e2a3da617ca663f4651dfb95f89436d77bcbe9","tarball":"http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz"},"scripts":{},"directories":{}}},"maintainers":[{"name":"deremer","email":"david@grandelabs.com"}],"time":{"0.1.0":"2011-07-21T22:12:48.054Z","0.1.1":"2011-07-22T16:00:06.956Z"},"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"}}
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.1.0 (Erlang OTP/R14B03)',
+silly get cb     etag: '"7RNXRYNQ7ZAEU7UDWZ3PD7G9X"',
+silly get cb     date: 'Wed, 27 Jul 2011 21:11:38 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '1766' } ]
+verbose mkdir done: /Users/dd/.npm/redmess 755
+verbose GET redmess/0.1.1
+verbose raw, before any munging redmess/0.1.1
+verbose url resolving [ 'http://registry.npmjs.org/', './redmess/0.1.1' ]
+verbose url resolved http://registry.npmjs.org/redmess/0.1.1
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/redmess/0.1.1',
+verbose url parsed   pathname: '/redmess/0.1.1' }
+verbose response http://registry.npmjs.org/redmess/0.1.1
+silly chunk {"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"name":"redmess","description":"A redis pub/sub using lists to achieve persistence","version":"0.1.1","repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"},"main":"index.js","engines":{"node":"v0.5.0-pre"},"dependencies":{"redis":"0.6.6","filter":"0.1.0"},"devDependencies":{},"_id":"redmess@0.1.1","_engineSupported":true,"_npmVersion":"1.0.8","_nodeVersion":"v0.5.0-pre","_defaultsLoaded":true,"dist":{"shasum":"a4e2a3da617ca663f4651dfb95f89436d77bcbe9","tarball":"http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz"},"scripts":{},"directories":{}}
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.1.0 (Erlang OTP/R14B03)',
+silly get cb     etag: '"7RNXRYNQ7ZAEU7UDWZ3PD7G9X"',
+silly get cb     date: 'Wed, 27 Jul 2011 21:11:38 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '638' } ]
+verbose mkdir done: /Users/dd/.npm/redmess/0.1.1 755
+verbose bin dist [ null,
+verbose bin dist   { shasum: 'a4e2a3da617ca663f4651dfb95f89436d77bcbe9',
+verbose bin dist     tarball: 'http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz' } ]
+verbose addRemoteTarball [ 'http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz',
+verbose addRemoteTarball   'a4e2a3da617ca663f4651dfb95f89436d77bcbe9' ]
+verbose mkdir done: /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756 755
+info fetch http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz
+verbose fetch to /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/tmp.tgz
+silly updated sha bytes 3377
+info shasum a4e2a3da617ca663f4651dfb95f89436d77bcbe9
+info shasum /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/tmp.tgz
+verbose mkdir done: /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/tmp.tgz"
+verbose success tar "-mvxpf" "-" "--no-same-owner" "-C" "/var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm"
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/index.js
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/package.json
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/README.md
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/test/
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/test/publish.js
+silly asyncMap in gTP /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package/test/subscribe.js
+verbose gunzed /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package
+verbose rm'ed /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package
+verbose renamed [ '/var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/___package.npm/package',
+verbose renamed   '/var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package' ]
+silly testEngine { author: 
+silly testEngine    { name: 'David DeRemer',
+silly testEngine      email: 'david@grandelabs.com' },
+silly testEngine   name: 'redmess',
+silly testEngine   description: 'A redis pub/sub using lists to achieve persistence',
+silly testEngine   version: '0.1.1',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/deremer/Redmess.git' },
+silly testEngine   main: 'index.js',
+silly testEngine   engines: { node: 'v0.5.0-pre' },
+silly testEngine   dependencies: { redis: '0.6.6', filter: '0.1.0' },
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'redmess@0.1.1',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.8',
+silly testEngine   _nodeVersion: 'v0.5.0-pre',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   path: '/var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package' }
+verbose caching /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package/package.json
+verbose loadDefaults redmess@0.1.1
+verbose tarball contents [ 'package' ]
+verbose from cache /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package/package.json
+verbose pack /var/folders/8b/_d9c4yr54c5gfs9b5c8hhl4r0000gn/T/npm-1311801099458/1311801099458-0.7017229695338756/contents/package /Users/dd/.npm/redmess/0.1.1/package.tgz
+verbose mkdir'ed /Users/dd/.npm/redmess/0.1.1
+verbose tar about to write tar and gzip it.
+silly tar args [ '-cvf',
+silly tar args   '-',
+silly tar args   'package/index.js',
+silly tar args   'package/package.json',
+silly tar args   'package/README.md',
+silly tar args   'package/test/publish.js',
+silly tar args   'package/test/subscribe.js' ]
+verbose success tar -cvf - <file list elided>
+verbose success gzip "--stdout"
+verbose mkdir done: /Users/dd/.npm/redmess/0.1.1/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /Users/dd/.npm/redmess/0.1.1/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/Users/dd/.npm/redmess/0.1.1/package.tgz"
+verbose success tar "-mvxpf" "-" "--no-same-owner" "-C" "/Users/dd/.npm/redmess/0.1.1/___package.npm"
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/index.js
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/package.json
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/README.md
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/test/
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/test/publish.js
+silly asyncMap in gTP /Users/dd/.npm/redmess/0.1.1/___package.npm/package/test/subscribe.js
+verbose gunzed /Users/dd/.npm/redmess/0.1.1/___package.npm/package
+verbose rm'ed /Users/dd/.npm/redmess/0.1.1/package
+verbose renamed [ '/Users/dd/.npm/redmess/0.1.1/___package.npm/package',
+verbose renamed   '/Users/dd/.npm/redmess/0.1.1/package' ]
+silly testEngine { author: 
+silly testEngine    { name: 'David DeRemer',
+silly testEngine      email: 'david@grandelabs.com' },
+silly testEngine   name: 'redmess',
+silly testEngine   description: 'A redis pub/sub using lists to achieve persistence',
+silly testEngine   version: '0.1.1',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/deremer/Redmess.git' },
+silly testEngine   main: 'index.js',
+silly testEngine   engines: { node: 'v0.5.0-pre' },
+silly testEngine   dependencies: { redis: '0.6.6', filter: '0.1.0' },
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'redmess@0.1.1',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.8',
+silly testEngine   _nodeVersion: 'v0.5.0-pre',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: 
+silly testEngine    { shasum: '966c4a0edf6346c597fba70abff923b63863bb50',
+silly testEngine      tarball: 'http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz' },
+silly testEngine   scripts: {} }
+verbose caching /Users/dd/.npm/redmess/0.1.1/package/package.json
+verbose loadDefaults redmess@0.1.1
+silly updated sha bytes 3380
+info shasum 966c4a0edf6346c597fba70abff923b63863bb50
+info shasum /Users/dd/.npm/redmess/0.1.1/package.tgz
+verbose from cache /Users/dd/.npm/redmess/0.1.1/package/package.json
+verbose chmod /Users/dd/.npm/redmess/0.1.1/package.json 644
+verbose chmod /Users/dd/.npm/redmess/0.1.1/package.tgz 644
+silly publish { author: 
+silly publish    { name: 'David DeRemer',
+silly publish      email: 'david@grandelabs.com' },
+silly publish   name: 'redmess',
+silly publish   description: 'A redis pub/sub using lists to achieve persistence',
+silly publish   version: '0.1.1',
+silly publish   repository: 
+silly publish    { type: 'git',
+silly publish      url: 'git://github.com/deremer/Redmess.git' },
+silly publish   main: 'index.js',
+silly publish   engines: { node: 'v0.5.0-pre' },
+silly publish   dependencies: { redis: '0.6.6', filter: '0.1.0' },
+silly publish   devDependencies: {},
+silly publish   _id: 'redmess@0.1.1',
+silly publish   _engineSupported: true,
+silly publish   _npmVersion: '1.0.8',
+silly publish   _nodeVersion: 'v0.5.0-pre',
+silly publish   _defaultsLoaded: true,
+silly publish   dist: 
+silly publish    { shasum: '966c4a0edf6346c597fba70abff923b63863bb50',
+silly publish      tarball: 'http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz' },
+silly publish   scripts: {} }
+info prepublish redmess@0.1.1
+verbose PUT redmess
+verbose raw, before any munging redmess
+verbose url resolving [ 'http://registry.npmjs.org/', './redmess' ]
+verbose url resolved http://registry.npmjs.org/redmess
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/redmess',
+verbose url parsed   pathname: '/redmess' }
+WARN Sending authorization over insecure channel.
+silly writing json { _id: 'redmess',
+silly writing json   name: 'redmess',
+silly writing json   description: 'A redis pub/sub using lists to achieve persistence',
+silly writing json   'dist-tags': {},
+silly writing json   versions: {},
+silly writing json   maintainers: [ { name: 'deremer', email: 'david@grandelabs.com' } ] }
+verbose response http://registry.npmjs.org/redmess
+silly chunk {"error":"conflict","reason":"Document update conflict."}
+silly chunk 
+verbose GET redmess
+verbose raw, before any munging redmess
+verbose url resolving [ 'http://registry.npmjs.org/', './redmess' ]
+verbose url resolved http://registry.npmjs.org/redmess
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/redmess',
+verbose url parsed   pathname: '/redmess' }
+verbose response http://registry.npmjs.org/redmess
+silly chunk {"_id":"redmess","_rev":"5-29d20e3eedf1eaed23344700497b3662","name":"redmess","description":"A redis pub/sub using lists to achieve persistence","dist-tags":{"latest":"0.1.1"},"versions":{"0.1.0":{"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"name":"redmess","description":"A redis pub/sub using lists to achieve persistence","version":"0.1.0","repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"},"main":"index.js","engines":{"node":"v0.5.0-pre"},"dependencies":{"redis":"0.6.6","filter":"0.1.0"},"devDependencies":{},"_id":"redmess@0.1.0","_engineSupported":true,"_npmVersion":"1.0.8","_nodeVersion":"v0.5.0-pre","_defaultsLoaded":true,"dist":{"shasum":"67345c4eac7252c767c60b7d37b4edcc2840586a","tarball":"http://registry.npmjs.org/redmess/-/redmess-0.1.0.tgz"},"scripts":{},"directories":{}},"0.1.1":{"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"name":"redmess","description":"A redis pub/sub using lists to achieve persistence","version":"0.1.1","repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"},"main":"index.js","engines":{"node":"v0.5.0-pre"},"dependencies":{"redis":"0.6.6","filter":"0.1.0"},"devDependencies":{},"_id":"redmess@0.1.1","_engineSupported":
+silly chunk true,"_npmVe
+silly chunk rsion":"1.0.8","_nodeVersion":"v0.5.0-pre","_defaultsLoaded":true,"dist":{"shasum":"a4e2a3da617ca663f4651dfb95f89436d77bcbe9","tarball":"http://registry.npmjs.org/redmess/-/redmess-0.1.1.tgz"},"scripts":{},"directories":{}}},"maintainers":[{"name":"deremer","email":"david@grandelabs.com"}],"time":{"0.1.0":"2011-07-21T22:12:48.054Z","0.1.1":"2011-07-22T16:00:06.956Z"},"author":{"name":"David DeRemer","email":"david@grandelabs.com"},"repository":{"type":"git","url":"git://github.com/deremer/Redmess.git"}}
+info Already published redmess@0.1.1
+verbose uploading bin dists []
+ERR! publish fail Cannot publish over existing version.
+ERR! publish fail Bump the 'version' field, set the --force flag, or
+ERR! publish fail     npm unpublish 'redmess@0.1.1'
+ERR! publish fail and try again
+ERR! 
+ERR! System Darwin 11.0.0
+ERR! command "node" "/usr/local/bin/npm" "publish" "redmess"
+verbose exit [ 1, true ]

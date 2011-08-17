@@ -37,6 +37,7 @@ var Publisher = function (config, name) {
 
 	if (config && name) {
 		var self = this;
+		this.serverInfo = config.host + ':' + config.port;
 		this.id = "PUBLISHER:" + name; // Identifier of the publisher
 		
 		// Create publisher redis client
@@ -49,7 +50,7 @@ var Publisher = function (config, name) {
 		});
 		
 		// Print to console that publisher started
-		console.log('STARTED: ' + this.id); 
+		console.log('STARTED: ' + this.id + ' SERVER:' + this.serverInfo); 
 		
 		// Emit an error if there is a problem
 		this.pubClient.on('error', function (error) {
@@ -121,6 +122,7 @@ var Subscriber = function (config, name, pipe, channels) {
 	if (config && name && pipe) {
 		
 		var self = this;
+		this.serverInfo = config.host + ':' + config.port;
 		this.id = "SUBSCRIBER:" + name; // Identifier of the subscriber
 		this.pipe = pipe;
 		
@@ -187,7 +189,7 @@ Subscriber.prototype.start = function () {
 	// Prints the number of messages in the queue, then starts loop
 	this.subClient.llen(this.pipe, function (err, reply) {
     if (err) { aError(err, self.id + " on pipe " + self.pipe); }
-    else { console.log('STARTED: ' + self.id + ' PIPE:' + self.pipe + " INITIAL_LENGTH:" + reply); }
+    else { console.log('STARTED: ' + self.id + ' SERVER:' + self.serverInfo + ' PIPE:' + self.pipe + " INITIAL_LENGTH:" + reply); }
   });
   // Begin listening for new messages  
 	this.next();

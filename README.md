@@ -1,4 +1,4 @@
-Redmess 0.1.4
+Redmess
 ============
 
 ## What's Redmess

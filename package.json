@@ -2,15 +2,15 @@
   "author": "David DeRemer <david@grandelabs.com>",
   "name": "redmess",
   "description": "A redis pub/sub using lists to achieve persistence",
-  "keywords": ["redis","list","pubsub","pub","sub","bloop","persistence","persistent","message","queue"],
-  "version": "0.1.5",
+  "keywords": ["redis","list","pubsub","pub","sub","blpop","persistence","persistent","message","queue"],
+  "version": "0.1.6",
   "repository": {
     "type": "git",
     "url": "git://github.com/deremer/Redmess.git"
   },
   "main": "index.js",
   "engines": {
-    "node": ">=0.4.0 <0.5.0"
+    "node": "*"
   },
   "dependencies": {
   	"redis": "0.6.x",
